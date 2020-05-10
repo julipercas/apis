@@ -7,7 +7,7 @@ try:
         api_address="http://dnd5eapi.co/api/races/"
         url=api_address + raza
         resp = requests.get(url)
-        if resp.status_code==200:#todo correcto
+        if resp.status_code==200:
             datos=json.loads(resp.content)
         return datos
 
@@ -15,7 +15,7 @@ try:
         api_address="http://dnd5eapi.co/api/races/"
         url=api_address + raza
         resp = requests.get(url)
-        if resp.status_code==200:#todo correcto
+        if resp.status_code==200:
             datos=json.loads(resp.content)
         return datos
 
@@ -35,8 +35,11 @@ try:
         input("Pulse cualquier tecla para continuar")
     
     def consultarsubrazas():
-        for elemento in datos['subraces']:
-            print(elemento['name'])
+        if len(datos)==0:
+            print("Esta raza no tiene ninguna subraza conocida.")
+        else:
+            for elemento in datos['subraces']:
+                print(elemento['name'])
         input("Pulse cualquier tecla para continuar")
 
     raza="elf"
