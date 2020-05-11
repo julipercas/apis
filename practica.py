@@ -17,7 +17,9 @@ try:
         resp = requests.get(url)
         if resp.status_code==200:
             datos=json.loads(resp.content)
-        return datos
+            return datos
+        elif resp.status_code==404: 
+            return 0
 
     def consultaralineacion():
         print("Alineacion:",datos['alignment'])
@@ -30,12 +32,17 @@ try:
         input("Pulse cualquier tecla para continuar")
 
     def consultarinicio():
-        for elemento in datos['starting_proficiencies']:
-            print(elemento['name'])
+        inicio=datos['starting_proficiencies']
+        if len(inicio)!=0:
+            for elemento in datos['starting_proficiencies']:
+                print(elemento['name'])
+        else:
+            print("Esta raza no tiene ningunas abilidades o armas al iniciar la partida.")
         input("Pulse cualquier tecla para continuar")
     
     def consultarsubrazas():
-        if len(datos)==0:
+        inicio=datos['subraces']
+        if len(inicio)==0:
             print("Esta raza no tiene ninguna subraza conocida.")
         else:
             for elemento in datos['subraces']:
@@ -60,8 +67,12 @@ try:
             print("Que raza desea consultar?")
             raza=input("")
             datos=generardatosnuevos(raza)
-            print("A continuacion, podra consultar los datos de %s"%raza)
-            input("Pulse cualquier tecla para continuar")
+            if datos!=0: 
+                print("A continuacion, podra consultar los datos de %s"%raza)    
+            else:
+                print("No existe la raza que esta buscando") 
+
+            input("Pulse cualquier tecla para continuar ...")
 
         elif opcion==2:
             consultaralineacion()
