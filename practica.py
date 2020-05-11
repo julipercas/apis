@@ -41,8 +41,8 @@ try:
         input("Pulse cualquier tecla para continuar")
     
     def consultarsubrazas():
-        inicio=datos['subraces']
-        if len(inicio)==0:
+        subrazas=datos['subraces']
+        if len(subrazas)==0:
             print("Esta raza no tiene ninguna subraza conocida.")
         else:
             for elemento in datos['subraces']:
